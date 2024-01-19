@@ -20,6 +20,7 @@ def hello_world():
     return 'Hello, World!'
 
 if __name__ == "__main__":
+    # had to use this "with" statement to solve error: https://flask.palletsprojects.com/en/2.3.x/appcontext/
     with app.app_context():
         db.create_all()
     app.run(debug=True)
