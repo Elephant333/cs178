@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -15,9 +15,10 @@ class Todo(db.Model):
     complete = db.Column(db.Boolean)
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+@app.route("/")
+def home():
+    todo_list = Todo.query.all()
+    return render_template("base.html", todo_list=todo_list)
 
 if __name__ == "__main__":
     # had to use this "with" statement to solve error: https://flask.palletsprojects.com/en/2.3.x/appcontext/
